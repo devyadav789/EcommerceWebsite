@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+{%block body%}
+    <div class="row">
+        <div class="col-md-4 mt-3 p-3">
+            <img src="{{product.image.url}}" class="img-fluid rounded-start" alt="..." width="70%" height="100%"> 
+        </div>
+        <div class="col-md-8 mt-3 p-3">
+                <h5 class="card-title">{{product.product_name}}</h5>
+                <h5 class="card-title">Price: {{product.price}} Rs</h5>
+                <p class="card-text">{{product.desc}}</p>
+                <a href="/addcart/{{product.product_id}}"> <button type="submit" class="btn btn-success">Add To Cart</button></a>
+                <a href="/"> <button type="submit" class="btn btn-danger">Back</button></a>
+        </div>
+    </div>
+{% endblock %}

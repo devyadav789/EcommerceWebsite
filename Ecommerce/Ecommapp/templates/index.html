@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+
+{%block body%}
+    <div class="row-md-3">
+        {% if messages%}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+    <div class="col-md-3 mt-3 p-3 bg-light">
+        <h3>Filter by category</h3>
+        <hr>
+        <p><a href="/">All</a></p>
+        <p><a href="{% url 'laptoplist' %}">Laptops</a></p>
+        <p><a href="{% url 'watchlist' %}">Watches</a></p>
+        <p><a href="{% url 'mobilelist' %}">Mobiles</a></p>
+        <h3>Filter by Price</h3>
+        <form method="POST" action="{% url 'range' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="Input1" class="form-label">Minimum:</label>
+                <input type="number" name="min" class="form-control" id="Input1" placeholder="Min Value">
+            </div>
+                <div class="mb-3">
+                <label for="Input2" class="form-label">Maximum:</label>
+                <input type="number" name="max" class="form-control" id="Input2" placeholder="Max Value">
+            </div>
+            <button type="submit" class="btn btn-primary" name="range">Search</button>
+        </form>
+        <h3>Sort by Price</h3>
+        <p><a href="/sortd">High to Low</a></p>
+        <p><a href="/sort">Low to High</a></p>
+    </div>
+    <div class="col-md-9 mt-3 p-3 bg-body-dark" style="background-color:grey">
+        <div class="row">
+            {% for x in products %}
+            <div class="col-md-4 mt-3">
+                <div class="card" style="width: 100% ">
+                    <img src="{{x.image.url}}" class="card-img-top" alt="bag1" style="height:330px" >
+                    <div class="card-body">
+                        <h5 class="card-title">{{x.category}}</h5>
+                        <p class="card-text">{{x.price}} Rs</p>
+                        <a href="/details/{{x.product_id}}" class="btn btn-primary">View</a>
+                        <a href="/addcart/{{x.product_id}}"> <button type="submit" class="btn btn-success">Add To Cart</button></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

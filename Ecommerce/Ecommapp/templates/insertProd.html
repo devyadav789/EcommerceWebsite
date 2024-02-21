@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+
+{%block body%}
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <input type="submit" value="submit" class="btn btn-success">
+        {% if messages%}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </form>
+{% endblock %}

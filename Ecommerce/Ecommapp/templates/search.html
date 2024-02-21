@@ -1,0 +1,22 @@
+{% extends "base.html"%}
+{% block title %} Search Products {% endblock %}
+
+{% block body %}
+<div class="col-md-9 mt-3 p-3 bg-body-secondary">
+    <div class="row">
+        {% for x in results%}
+        <div class="col-md-4">
+            <div class="card" style="width: 100% ">
+                <img src="{{x.image.url}}" class="card-img-top" alt="bag1" style="height:330px" >
+                <div class="card-body">
+                    <h5 class="card-title">{{x.product_name}}</h5>
+                    <p class="card-text">{{x.price}} Rs</p>
+                    <a href="/details/{{x.product_id}}" class="btn btn-primary">View</a>
+                    <a href="/addcart/{{x.product_id}}"> <button type="submit" class="btn btn-success">Add To Cart</button></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    {% endblock %}
